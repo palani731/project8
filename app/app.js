@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const admin = require("firebase-admin");
+const production_db = "https://restaurantmanagementsyst-1d9b1.firebaseio.com/";
+const service_account = require("./restaurantmanagementsyst-1d9b1-firebase-adminsdk-uw6fl-bf3b47645d.json");
+admin.initializeApp({ credential: admin.credential.cert(service_account), databaseURL: production_db });
+
 var indexRouter = require('./routes/index');
 var receptionRouter = require('./routes/reception');
 var customerRouter = require('./routes/customer');
