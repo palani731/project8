@@ -1,0 +1,91 @@
+<div class="text-center container">
+    <br>
+<h1>Menu</h1>
+<br><br><br><br>
+<p>Sirloin Steak</p>
+<img src="/images/steak.jpg" alt="steak">
+<form>
+    <div class="value-button decrease" name="0" onclick="decreaseValue(this)" value="Decrease Value">-</div>
+    <input class="order" type="number" id="0" value="0" name="Sirloin Steak"/>
+    <div class="value-button" id="increase" name="0" onclick="increaseValue(this)" value="Increase Value">+</div>
+</form> 
+<hr>
+<p>Spaghetti Arrabiata </p>
+<img src="/images/pasta.jpg" alt="pasta">
+<form>
+    <div class="value-button decrease" name="1" onclick="decreaseValue(this)" value="Decrease Value">-</div>
+    <input class="order" type="number" id="1" value="0" name="Spaghetti Arrabiata"/>
+    <div class="value-button" id="increase" name="1" onclick="increaseValue(this)" value="Increase Value">+</div>
+</form> 
+<hr>
+<p>Chocolate Pancakes</p>
+<img src="/images/dessert.jpg" alt="dessert">
+<form>
+    <div class="value-button decrease" name="2" onclick="decreaseValue(this)" value="Decrease Value">-</div>
+    <input class="order" type="number" id="2" value="0" name="Chocolate Pancakes" />
+    <div class="value-button" id="increase" name="2" onclick="increaseValue(this)" value="Increase Value">+</div>
+</form> 
+<hr>
+<button id='place-order' type="button" class="btn btn-info">Place Order</button>
+<br><br><br>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script>
+var config = {
+    apiKey: "AIzaSyDkKclQdfddnOZzEnCGlrJO-pmMArlx8YI",
+    authDomain: "restaurantmanagementsyst-1d9b1.firebaseapp.com",
+    databaseURL: "https://restaurantmanagementsyst-1d9b1.firebaseio.com/",
+    storageBucket: "restaurantmanagementsyst-1d9b1.appspot.com"
+};
+
+firebase.initializeApp(config);
+var db = firebase.database();
+
+function increaseValue(event) {
+    const num = parseInt(event.getAttribute('name'));
+    var value = parseInt(document.getElementsByClassName('order')[num].value, 10);
+    value = isNaN(value) ? 0 : value;
+    value += 1;
+    document.getElementsByClassName('order')[num].value = value;
+}
+
+function decreaseValue(event) {
+    const num = parseInt(event.getAttribute('name'));
+    var value = parseInt(document.getElementsByClassName('order')[num].value, 10);
+    value = isNaN(value) ? 0 : value;
+    value < 1 ? value = 1 : '';
+    value -= 1;
+    document.getElementsByClassName('order')[num].value = value;
+}
+
+document.getElementById('place-order').addEventListener("click", () => {
+    const items = document.getElementsByClassName("order");
+    const dishesOrdered = [];
+    for (let i = 0; i < items.length; i++){
+        const obj = {
+            "name": items[i].name,
+            "quantity": items[i].value
+        };
+        dishesOrdered.push(obj);
+    }
+    
+    order = {
+        "customerId": 2,
+        "dishesOrdered": dishesOrdered,
+        "orderNo": 2,
+        "tableNo": 2
+    }
+
+    const orderRef = db.ref("/orders").push();
+    orderRef.set(order, function(error) {
+        if (error) {
+        console.log("Order could not be saved: " + error);
+        } else {
+        console.log("Order saved successfully");
+        location.href = "http://localhost:3000/menu/ordered"
+        }
+    });
+
+});
+</script>

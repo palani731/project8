@@ -12,6 +12,7 @@ admin.initializeApp({ credential: admin.credential.cert(service_account), databa
 var indexRouter = require('./routes/index');
 var receptionRouter = require('./routes/reception');
 var customerRouter = require('./routes/customer');
+var menuRouter = require('./routes/menu');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/reception', receptionRouter);
 app.use('/customer', customerRouter);
+app.use('/menu', menuRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
