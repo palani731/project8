@@ -10,13 +10,11 @@ class Transaction {
     }
 
     makeTransaction(){
-        return bool
+        return true
     }
 
     getTransactionDetails(){
-        return {
-            "trans1": "trans1"
-        }
+        return this.content;
     }
 }
 
