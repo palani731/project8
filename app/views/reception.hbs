@@ -110,72 +110,23 @@
     <div class="mt-5 p-2 container border border-secondary">
         <h3 class="border-bottom">Tables Map</h3>
         <div class="row m-3">
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
+            {{#each row1Tables}}
+            <div class="col-4">
+                <button type="button" class="btn {{#if this}}btn-success {{else}}btn-danger{{/if}}" onclick="handleTable(event)" id="table1{{@index}}">
                     Table 1
                 </button>
             </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-danger">
-                     Table 2
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
-                     Table 3
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
+            {{/each}}
+        </div>
+
+        <div class="row m-3">
+             {{#each row2Tables}}
+            <div class="col-4">
+                <button type="button" class="btn {{#if this}}btn-success {{else}}btn-danger{{/if}}" onclick="handleTable(event)" id="table2{{@index}}">
                      Table 4
                 </button>
             </div>
-        </div>
-
-        <div class="row m-3">
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
-                     Table 5
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-danger">
-                     Table 6
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
-                     Table 7
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-danger">
-                     Table 8
-                </button>
-            </div>
-        </div>
-
-        <div class="row m-3">
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
-                     Table 9
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
-                     Table 10
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-success">
-                     Table 11
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-danger">
-                     Table 12
-                </button>
-            </div>
+            {{/each}}
         </div>
     </div>
 
@@ -256,4 +207,8 @@
                 }
             });
         });
+
+        function handleTable(event) {
+            console.log(event.target);
+        }
 </script>
