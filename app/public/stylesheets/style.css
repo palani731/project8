@@ -104,3 +104,10 @@ float: right;
   height: 16px;
   background: url('https://www.everythingfrontend.com/samples/star-rating/star.png') 0 -16px;
 }
+.searchbar, .mybar {
+  width: 100%;
+}
+
+.customerFound {
+  visibility: hidden;
+}

@@ -1,14 +1,18 @@
 <div class="text-center container">
 
-
+    <br>
     <h1>Receptionist</h1>
+
+    <div class="alert alert-success customerFound" id="customerFoundBanner" role="alert">
+        User found! ID is
+    </div>
 
     {{!-- Search bar --}}
     <div class="searchbar">
         <form action="">
-            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 " id="mybar">
                 <div class="input-group">
-                    <input type="search" placeholder="Search for customer by ID or Mobile No." aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                    <input type="search" placeholder="Search for customer by ID or Mobile No." aria-describedby="button-addon1" class="form-control border-0 bg-light" id="waitlistNum">
                     <div class="input-group-append">
                         <button id="button-addon1" type="submit" class="btn btn-link text-primary">
                             <i class="fa fa-search"></i>
@@ -108,22 +112,22 @@
         <div class="row m-3">
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                    Table
+                    Table 1
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 2
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 3
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 4
                 </button>
             </div>
         </div>
@@ -131,22 +135,22 @@
         <div class="row m-3">
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 5
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 6
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 7
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 8
                 </button>
             </div>
         </div>
@@ -154,62 +158,102 @@
         <div class="row m-3">
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 9
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 10
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 11
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 12
                 </button>
             </div>
         </div>
     </div>
 
+    <br>
     {{!-- Waitlist Area --}}
+    <h3>Waiting List</h3>
+        <ul class="list-group">
+            {{#each names}}
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <li class="list-group-item">{{this}}</li>
+                </div>
+                <div class="col-4"></div>
+            </div>
+            {{/each}}
+        </ul>
     
-    <div class="list-group mt-5">
-        <a class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Haseeb Khan</h5>
-                <small>10 mins ago</small>
-            </div>
-        </a>
-        <a class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Ali Shazal</h5>
-                <small>5 mins ago</small>
-            </div>
-        </a>
-        <a class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Aiza Usman</h5>
-                <small>3 mins ago</small>
-            </div>
-        </a>
-    </div>
 
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
 
 <script>
     document.getElementById("newCustSubmitBtn").addEventListener("click", () => {
         const fname = document.getElementsByName("fname")[0].value;
         const lname = document.getElementsByName("lname")[0].value;
         const mobNo = document.getElementsByName("mobNo")[0].value;
-        console.log(fname, lname, mobNo);
+        customer = {
+            "customerId": Math.round(Math.random()*1000),
+            "firstName": fname,
+            "lastName": lname,
+            "phoneNumber": mobNo,
+            "visits": 1
+        }
+        
+        const custRef = db.ref("/customers").push();
+        custRef.set(customer, function (error) {
+            if (error) {
+                console.log("Customer could not be saved: " + error);
+            } else {
+                console.log("Customer saved successfully");
+                alert("Customer saved!");
+                location.reload();
+            }
+        });
+    
     });
 
     document.getElementById("waitlistSubmit").addEventListener("click", () => {
             const num = document.getElementsByName("waitlist-num")[0].value;
-            console.log(num);
+            db.ref("/waitingList").push().set({
+                "id": num
+            }).then(() => {
+                alert("Customer added to waitlist")
+                location.reload();
+            })
+        });
+
+    var config = {
+            apiKey: "AIzaSyDkKclQdfddnOZzEnCGlrJO-pmMArlx8YI",
+            authDomain: "restaurantmanagementsyst-1d9b1.firebaseapp.com",
+            databaseURL: "https://restaurantmanagementsyst-1d9b1.firebaseio.com/",
+            storageBucket: "restaurantmanagementsyst-1d9b1.appspot.com"
+        };
+
+        firebase.initializeApp(config);
+        var db = firebase.database();
+        document.getElementById("button-addon1").addEventListener("click", (event) => {
+            event.preventDefault();
+            const num = document.getElementById("waitlistNum").value;
+            db.ref("customers").orderByChild('phoneNumber').equalTo(num).on("value", function (snapshot) {
+                if (snapshot.val()){
+                    const ban = document.getElementById("customerFoundBanner")
+                    ban.classList.remove("customerFound")
+                    const nod = Object.keys(snapshot.val())[0];
+                    ban.textContent += snapshot.val()[nod].customerId;
+                }
+            });
         });
 </script>
