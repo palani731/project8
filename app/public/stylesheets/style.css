@@ -75,3 +75,11 @@ input[class=order]::-webkit-outer-spin-button {
 #demo {
   font-size: 60px;
 }
+
+.searchbar, .mybar {
+  width: 100%;
+}
+
+.customerFound {
+  visibility: hidden;
+}

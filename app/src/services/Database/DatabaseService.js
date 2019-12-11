@@ -151,6 +151,15 @@ class DatabaseService {
         });
     }
 
+    specific(path, child, equal){
+
+        return new Promise((resolve, reject) => {
+            this.db.ref(path).orderByChild(child).equalTo(equal).on("value", function (snapshot) {
+                snapshot.exists() ? resolve(snapshot.val()) : reject(new Error("Data does not exist at the given path"));
+            });
+        });
+    }
+
     test() {
         console.log("Database ready..");
     }
