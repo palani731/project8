@@ -1,0 +1,43 @@
+
+<div class="form-group text-center container">
+    <h1>Dessert Chef</h1>
+    <div class="row">
+        {{#each orders}}
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Order No. {{@index}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{this.dishesOrdered.2.name}}</h6>
+                    <p class="card-text">Quantity: {{this.dishesOrdered.2.quantity}}</p>
+                    <button id='{{this.orderNo}}' type="button" class="btn btn-info" onclick="completeOrder(event)">Order Complete</button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>    
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script>
+    var config = {
+        apiKey: "AIzaSyDkKclQdfddnOZzEnCGlrJO-pmMArlx8YI",
+        authDomain: "restaurantmanagementsyst-1d9b1.firebaseapp.com",
+        databaseURL: "https://restaurantmanagementsyst-1d9b1.firebaseio.com/",
+        storageBucket: "restaurantmanagementsyst-1d9b1.appspot.com"
+    };
+
+    firebase.initializeApp(config);
+    var db = firebase.database();
+
+    function completeOrder(event){
+        const t = parseInt(event.target.id);
+
+        db.ref("orders").orderByChild("orderNo").equalTo(t).once("value", function (snapshot) {
+            const k = Object.keys(snapshot.val())[0];
+            db.ref(`/orders/${k}`).update({ completed: true }).then(() => {
+                location.reload();
+            })
+
+        });
+    }
+</script>

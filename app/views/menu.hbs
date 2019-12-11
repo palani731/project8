@@ -74,7 +74,8 @@ document.getElementById('place-order').addEventListener("click", () => {
         "customerId": 2,
         "dishesOrdered": dishesOrdered,
         "orderNo": 2,
-        "tableNo": 2
+        "tableNo": 2,
+        "completed": false
     }
 
     const orderRef = db.ref("/orders").push();

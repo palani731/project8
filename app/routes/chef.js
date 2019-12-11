@@ -1,27 +1,33 @@
 var express = require('express');
 var router = express.Router();
+const DatabaseService = require('../src/services/Database/DatabaseService.js');
+const database = new DatabaseService();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('chef');
+router.get('/dessert', function(req, res, next) {
+    database.getList("/orders")
+    .then (result => {
+        chefsOrders = []
+        result.forEach(ord => {
+            if (parseInt(ord.dishesOrdered[2].quantity) > 0 && !ord.completed){
+                chefsOrders.push(ord);
+            }
+        });
+        res.render('dessert', {orders: chefsOrders});
+    })
+});
 
-    // filmArray.forEach(element => {
-    //     //Add corresponding film key in film.
-    //     db.ref(`/films/${element}/issues/${issue.id}`).set(true, function (error) {
-    //         if (error) {
-    //             console.log("issue key could not be saved under film: " + error);
-    //         }
-    //     });
-
-    //     //Add films into issue.
-    //     db.ref(`/films/${element}`).once("value", function (snapshot) {
-    //         db.ref(`/issues/${issue.id}/films/${element}`).set(snapshot.val(), function (error) {
-    //             if (error) {
-    //                 console.log("Film data could not be saved under issue. " + error);
-    //             }
-    //         })
-    //     });
-    // });
+router.get('/pasta', function(req, res, next) {
+    database.getList("/orders")
+    .then (result => {
+        chefsOrders = []
+        result.forEach(ord => {
+            if (parseInt(ord.dishesOrdered[1].quantity) > 0 && !ord.completed){
+                chefsOrders.push(ord);
+            }
+        });
+        res.render('pasta', {orders: chefsOrders});
+    })
 });
 
 module.exports = router;
