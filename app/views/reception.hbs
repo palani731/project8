@@ -108,22 +108,22 @@
         <div class="row m-3">
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                    Table
+                    Table 1
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 2
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 3
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 4
                 </button>
             </div>
         </div>
@@ -131,22 +131,22 @@
         <div class="row m-3">
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 5
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 6
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 7
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 8
                 </button>
             </div>
         </div>
@@ -154,22 +154,22 @@
         <div class="row m-3">
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 9
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 10
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success">
-                     Table
+                     Table 11
                 </button>
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-danger">
-                     Table
+                     Table 12
                 </button>
             </div>
         </div>
@@ -209,6 +209,11 @@
     });
 
     document.getElementById("waitlistSubmit").addEventListener("click", () => {
+            const num = document.getElementsByName("waitlist-num")[0].value;
+            console.log(num);
+        });
+
+    document.getElementById("button-addon1").addEventListener("click", () => {
             const num = document.getElementsByName("waitlist-num")[0].value;
             console.log(num);
         });
