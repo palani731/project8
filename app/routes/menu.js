@@ -3,11 +3,11 @@ var router = express.Router();
 
 /* GET menu page. */
 router.get('/', function(req, res, next) {
-  res.render('menu');
+  res.render('menu', { layout: "customerLayout" });
 });
 
 router.get('/ordered', function(req, res, next) {
-    res.render("ordered");
+  res.render("ordered", { layout: "customerLayout" });
   });
 
 module.exports = router;

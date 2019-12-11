@@ -112,9 +112,22 @@
         <div class="row m-3">
             {{#each row1Tables}}
             <div class="col-4">
-                <button type="button" class="btn {{#if this}}btn-success {{else}}btn-danger{{/if}}" onclick="handleTable(event)" id="table1{{@index}}">
-                    Table 1
-                </button>
+                <div class="dropdown">
+                    <button class="btn {{#if this}}btn-danger {{else}}btn-success{{/if}} dropdown-toggle" type="button" id="dropdownMenuButton1{{@index}}" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Table
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1{{@index}}">
+                        {{#if this}}
+                            <a class="dropdown-item" href="#" id="1{{@index}}" onclick="handleCheckout(event)">Checkout</a>
+                        {{else}}
+                            <div class="dropdown-item">
+                                <input type="text" id="1{{@index}}" placeholder="Customer Mobile or ID">
+                                <button class="btn-sm btn-primary" onclick="handleAssign(event, 1{{@index}})">Submit</button>
+                            </div>
+                         {{/if}}
+                    </div>
+                </div>
             </div>
             {{/each}}
         </div>
@@ -122,9 +135,22 @@
         <div class="row m-3">
              {{#each row2Tables}}
             <div class="col-4">
-                <button type="button" class="btn {{#if this}}btn-success {{else}}btn-danger{{/if}}" onclick="handleTable(event)" id="table2{{@index}}">
-                     Table 4
-                </button>
+                <div class="dropdown">
+                    <button class="btn {{#if this}}btn-danger {{else}}btn-success{{/if}} dropdown-toggle" type="button" id="dropdownMenuButton2{{@index}}"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Table
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2{{@index}}">
+                        {{#if this}}
+                        <a class="dropdown-item" href="#" id="2{{@index}}" onclick="handleCheckout(event)">Checkout</a>
+                        {{else}}
+                        <div class="dropdown-item">
+                            <input type="text" id="2{{@index}}" placeholder="Customer Mobile or ID">
+                            <button class="btn-sm btn-primary" onclick="handleAssign(event, 2{{@index}})">Submit</button>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
             </div>
             {{/each}}
         </div>
@@ -208,7 +234,26 @@
             });
         });
 
-        function handleTable(event) {
-            console.log(event.target);
+        function handleCheckout(event) {
+            const tid = parseInt(event.target.id);
+            console.log(tid)
+            db.ref("tables").orderByChild("tableNo").equalTo(tid).once("value", function (snapshot) {
+                const k = Object.keys(snapshot.val())[0];
+                console.log(k)
+                db.ref(`/tables/${k}`).update({ occupied: false, customerId: "-" }).then(() => {
+                    location.reload();
+                })
+            });
+        }
+
+        function handleAssign(event, tableId) {
+            const cid = document.getElementById(tableId).value;
+            db.ref("tables").orderByChild("tableNo").equalTo(tableId).once("value", function (snapshot) {
+                const k = Object.keys(snapshot.val())[0];
+                console.log(k)
+                db.ref(`/tables/${k}`).update({ occupied: true, customerId: cid }).then(() => {
+                    location.reload();
+                })
+            });
         }
 </script>

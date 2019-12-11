@@ -13,7 +13,7 @@ router.get('/dessert', function(req, res, next) {
                 chefsOrders.push(ord);
             }
         });
-        res.render('dessert', {orders: chefsOrders});
+        res.render('dessert', {layout: "otherLayout", orders: chefsOrders});
     })
 });
 
@@ -26,7 +26,7 @@ router.get('/pasta', function(req, res, next) {
                 chefsOrders.push(ord);
             }
         });
-        res.render('pasta', {orders: chefsOrders});
+        res.render('pasta', { layout: "otherLayout", orders: chefsOrders});
     })
 });
 

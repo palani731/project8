@@ -29,8 +29,7 @@ router.get('/', function (req, res, next) {
                         for (let i = 3; i < 6; i++) {
                             row2Tables.push(result[i].occupied);
                         }
-                        console.log(row1Tables, row2Tables);
-                        res.render("reception", { names: names, row1Tables, row2Tables });
+                        res.render("reception", { layout: "otherLayout", names: names, row1Tables, row2Tables });
                     })
                 })
         },
