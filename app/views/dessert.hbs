@@ -31,7 +31,6 @@
 
     function completeOrder(event){
         const t = parseInt(event.target.id);
-        console.log(t);
         db.ref("orders").orderByChild("orderNo").equalTo(t).once("value", function (snapshot) {
             const k = Object.keys(snapshot.val())[0];
             db.ref(`/orders/${k}`).update({ completed: true }).then(() => {
