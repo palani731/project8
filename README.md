@@ -16,7 +16,7 @@
 
 ### Step 3
 - [Use Case Diagram](https://github.com/haseebdeveloping/FinalProject/blob/master/ProjectDocuments/Use-Case-Diagram.jpg)
-- [Use Cases Description] (https://github.com/haseebdeveloping/FinalProject/tree/master/ProjectDocuments/Use-Cases)
+- [Use Cases Description](https://github.com/haseebdeveloping/FinalProject/tree/master/ProjectDocuments/Use-Cases)
 - [Activity Diagrams](https://github.com/haseebdeveloping/FinalProject/tree/master/ProjectDocuments/Activity-Diagrams)
 - [Class Diagram](https://github.com/haseebdeveloping/FinalProject/blob/master/ProjectDocuments/Class-Diagram.jpg)
 - [Sequence Diagrams](https://github.com/haseebdeveloping/FinalProject/tree/master/ProjectDocuments/Sequence-Diagrams)
