@@ -25,5 +25,11 @@
     <label for="exampleFormControlTextarea1">Additional comments</label>
     <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
     <br>
-    <button id='submit-feedback' type="button" class="btn btn-info">Submit Feedback</button>
+    <button id='submit-feedback' type="button" class="btn btn-info" onclick="submit(event)">Submit Feedback</button>
 </div>
+
+<script>
+    function submit(event){
+        location.reload()
+    }
+</script>

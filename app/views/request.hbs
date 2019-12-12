@@ -7,5 +7,11 @@
     <hr>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     <br>
-    <button id='submit-request' type="button" class="btn btn-info">Submit Request</button>
+    <button id='submit-request' type="button" class="btn btn-info" onclick="submit(event)">Submit Request</button>
 </div>
+
+<script>
+    function submit(event){
+        location.reload()
+    }
+</script>
