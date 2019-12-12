@@ -31,7 +31,6 @@
 ### Extra Credit
 - [x] Demo
 - [x] [Risk Table](https://github.com/haseebdeveloping/FinalProject/blob/master/ProjectDocuments/Risk%20Table.pdf)
-- [x] [Project Schedule]()
 
 ## Requirements Gathering
 The requirements were gathered in the following way:
