@@ -14,3 +14,8 @@ We will utilize agile development and specifically the Scrum framework for our p
 - We have three dedicated members that will work on this project and they are all located in Abu Dhabi.
 - Our customer, Pancake Factory, is heavily involved in the process for feedback and guidance. Since they are moving away from their manual and paper-based system, they are very excited for this project.
 
+
+### Extra Credit
+- [x] Demo
+- [x] Risk Table
+- [x] Project Schedule
